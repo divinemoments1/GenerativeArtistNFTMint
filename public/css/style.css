@@ -8,10 +8,31 @@ html {
   box-sizing: inherit;
 }
 
-div {
+/* div {
   border: 1px solid red;
-}
+} */
 
 nav {
   font-family: orbitron;
 }
+
+.area {
+  min-height: 750px;
+}
+
+.spacer {
+  min-height: 75px;
+}
+
+#splash {
+  min-height: 700px;
+  background: url("/images/1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* #splash-image {
+  z-index: -1;
+} */
