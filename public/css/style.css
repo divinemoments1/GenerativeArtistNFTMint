@@ -8,9 +8,9 @@ html {
   box-sizing: inherit;
 }
 
-/* div {
-  border: 1px solid red;
-} */
+body {
+  background-color: RGB(111, 123, 140);
+}
 
 nav {
   font-family: orbitron;
@@ -25,14 +25,10 @@ nav {
 }
 
 #splash {
-  min-height: 700px;
-  background: url("/images/1.png");
+  min-height: 800px;
+  background: url("/images/DeepDreamTwoPaintings.jpeg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
 }
-
-/* #splash-image {
-  z-index: -1;
-} */
