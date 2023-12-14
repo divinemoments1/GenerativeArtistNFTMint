@@ -30,7 +30,7 @@ app.get("/projects", (req, res) => {
 
 app.get("/project/:id", (req, res) => {
   let id = req.params.id;
-  if (id > data.length) {
+  if (id > projects.length) {
     throw new Error("No project with that ID");
   }
   res.render("project.ejs", { project: projects[id - 1], which: id });
