@@ -9,8 +9,32 @@ html {
 }
 
 body {
-  background-color: RGB(111, 123, 140);
+  background-color: RGB(165, 167, 188);
   font-family: orbitron;
+}
+
+/* div {
+  border: 1px solid red;
+} */
+
+@keyframes fadeInAnimation {
+  /*for div fade-in */
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+card {
+  min-height: 400px;
+}
+
+.fadein {
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .area {
