@@ -2,14 +2,19 @@ import express from "express";
 import * as utils from "./utils/utils.js";
 import * as db from "./utils/database.js";
 import dotenv from "dotenv";
+import cors from "cors";
+
 dotenv.config();
 let projects = [];
+let contracts = [];
+let mints = [];
 
 const app = express();
 const port = 3000;
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.static("public"));
+app.use(cors({ methods: ["GET", "POST"] }));
 
 app.get("/", async (req, res, next) => {
   await db
@@ -17,15 +22,29 @@ app.get("/", async (req, res, next) => {
     .then(async () => {
       // query the databse for project records
       projects = await db.getAllProjects();
-      console.log(projects);
+      contracts = [];
+      mints = [];
+      projects.forEach((item) => {
+        contracts.push(item.contractAddress);
+        mints.push(0); // initializing parallel array
+      });
       let featuredRand = Math.floor(Math.random() * projects.length);
-      res.render("index.ejs", { featuredProject: projects[featuredRand] });
+      res.render("index.ejs", {
+        featuredProject: projects[featuredRand],
+        contracts: contracts,
+        mints: mints,
+        projects: projects,
+      });
     })
     .catch(next);
 });
 
 app.get("/projects", (req, res) => {
-  res.render("projects.ejs", { projectArray: projects });
+  res.render("projects.ejs", {
+    contracts: contracts,
+    mints: mints,
+    projects: projects,
+  });
 });
 
 app.get("/project/:id", (req, res) => {
@@ -33,7 +52,12 @@ app.get("/project/:id", (req, res) => {
   if (id > projects.length) {
     throw new Error("No project with that ID");
   }
-  res.render("project.ejs", { project: projects[id - 1], which: id });
+  res.render("project.ejs", {
+    project: projects[id - 1],
+    contracts: contracts,
+    mints: mints,
+    projects: projects,
+  });
 });
 
 app.get("/contact", (req, res) => {
